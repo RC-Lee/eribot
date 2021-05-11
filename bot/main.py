@@ -88,7 +88,7 @@ async def on_message(message):
             tempList = func.getC(user[0]["eventRoll"])
             embed = discord.Embed(title="Listing (last 25) 4 and 5 star character rolls from event", color=discord.Color.red())
         elif message.content == '$lew':
-            tempList = func.getC(user[0]["eventRoll"])
+            tempList = func.getW(user[0]["eventRoll"])
             embed = discord.Embed(title="Listing (last 25) 4 star weapon rolls from event", color=discord.Color.red())
         else: 
             return

@@ -79,8 +79,9 @@ async def on_message(message):
             embed = discord.Embed(title="Listing 4 and 5 star event rolls", color=discord.Color.red())
             embed.set_author(name=message.author.name, icon_url = message.author.avatar_url)
             for roll in user[0]["eventRoll"]:
-                if(roll["rStar"] == "four" or roll["rStar"] == "five"):
+                if(roll["rStar"] >= 4 ):
                     embed.add_field(name="Roll " + str(roll["r"]) +": ", value=roll["rName"], inline=False)
+            embed.set_footer(text="If you don't see anything, you haven't rolled a 4 or 5 star yet"))
             await message.channel.send(embed=embed)
     
     if message.content == '$help':

@@ -66,7 +66,7 @@ async def on_message(message):
                 embed.set_footer(text=temp["name"] + " from Roll#" + str(temp["r"]))
             await message.channel.send(embed=embed)
 
-    if message.content.startswwith('$le'):
+    if message.content.startswith('$le'):
         myquery = {"_id": message.author.id}
         if(collection.count_documents(myquery) == 0):
             await message.channel.send("You haven't rolled yet")
@@ -90,6 +90,8 @@ async def on_message(message):
         elif message.content == '$lew':
             tempList = func.getC(user[0]["eventRoll"])[-25]
             embed = discord.Embed(title="Listing (last 25) 4 star weapon rolls from event", color=discord.Color.red())
+        else: 
+            return
 
         embed.set_author(name=message.author.name, icon_url = message.author.avatar_url)
         for roll in tempList:

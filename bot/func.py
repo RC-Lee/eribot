@@ -80,7 +80,7 @@ async def rollEvent(userData):
             item = choose5(ebanner)
             e5Pity = 0
             e4Pity = 0
-        elif value == 4:
+        elif x == 4:
             if random.random() < 0.5:
                 item = getC(ebanner)
             else:

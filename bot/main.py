@@ -68,7 +68,7 @@ async def on_message(message):
                     temp = tData["eventRoll"][-1]
         if(temp):
             embed.set_image(url=temp["rUrl"])
-            embed.set_footer(text=temp["rName"] + " from Roll#" + str(temp["r"])))
+            embed.set_footer(text=temp["rName"] + " from Roll#" + str(temp["r"]))
         await message.channel.send(embed=embed)
 
     if message.content == '$le':

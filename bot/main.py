@@ -68,6 +68,7 @@ async def on_message(message):
                     temp = tData["eventRoll"][-1]
         if(temp):
             embed.set_image(url=temp["rUrl"])
+            embed.set_footer(text=temp["rName"] + " from Roll#" + str(temp["r"])))
         await message.channel.send(embed=embed)
 
     if message.content == '$le':
@@ -81,7 +82,7 @@ async def on_message(message):
             for roll in user[0]["eventRoll"]:
                 if(roll["rStar"] >= 4 ):
                     embed.add_field(name="Roll " + str(roll["r"]) +": ", value=roll["rName"], inline=False)
-            embed.set_footer(text="If you don't see anything, you haven't rolled a 4 or 5 star yet"))
+            embed.set_footer(text="If you don't see anything, you haven't rolled a 4 or 5 star yet")
             await message.channel.send(embed=embed)
     
     if message.content == '$help':

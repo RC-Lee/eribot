@@ -28,7 +28,7 @@ async def on_message(message):
     if not message.guild.me.permissions_in(message.channel).send_messages:
         return
     
-    if message.content == '$roll_event':
+    if message.content == '$re':
         myquery = {"_id": message.author.id}
         if(collection.count_documents(myquery) == 0):
             post = {"_id": message.author.id, "name": message.author.name, "eventRoll": [{"r": 0, "rStar":"NA", "rName": "", "rUrl": ""}], "eiRoll": 0, "normalRoll": 0, "event4Pity": 0, "ei4Pity": 0, "normal4Pity": 0, "event5Pity": 0, "ei5Pity": 0, "normal5Pity": 0, "eventPromo": 0, }
@@ -61,7 +61,7 @@ async def on_message(message):
             embed.add_field(name="Roll " + str(tData["eventRoll"][-1]["r"]) +": ", value= tData["eventRoll"][-1]["rName"], inline=False)
         await message.channel.send(embed=embed)
 
-    if message.content == '$list_event':
+    if message.content == '$le':
         myquery = {"_id": message.author.id}
         if(collection.count_documents(myquery) == 0):
             await message.channel.send("You haven't rolled yet")
@@ -74,10 +74,11 @@ async def on_message(message):
                     embed.add_field(name="Roll " + str(roll["r"]) +": ", value=roll["rName"], inline=False)
             await message.channel.send(embed=embed)
     
-    if message.content == '$info':
+    if message.content == '$help':
         embed = discord.Embed(title="List of commands", color=discord.Color.green())
-        embed.add_field(name="$roll_event", value="Roll once on the event banner", inline=False)
-        embed.add_field(name="$list_event", value="List 4 and 5 star rolls from event banner", inline = False)
+        embed.add_field(name="$re", value="Roll once on the event banner", inline=False)
+        embed.add_field(name="$re10", value="Roll ten times on the event banner", inline=False)
+        embed.add_field(name="$le", value="List 4 and 5 star rolls from event banner", inline = False)
         await message.channel.send(embed = embed)
     
     

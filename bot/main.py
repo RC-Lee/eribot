@@ -97,7 +97,7 @@ async def on_message(message):
         if(len(tempList) > 0):
             for i in range(len(tempList) - 1, -1, -1):
                 if(tempList[i]["star"] >= 4 ):
-                    embed.add_field(name="Roll " + str(roll["r"]) +": ", value=roll["name"], inline=False)
+                    embed.add_field(name="Roll " + str(tempList[i]["r"]) +": ", value=tempList[i]["name"], inline=False)
         embed.set_footer(text="If you don't see anything, you haven't rolled a 4 or 5 star yet")
         await message.channel.send(embed=embed)
     

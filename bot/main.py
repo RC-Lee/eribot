@@ -49,7 +49,7 @@ async def on_message(message):
     if message.content == '$re10':
         myquery = {"_id": message.author.id}
         if(collection.count_documents(myquery) == 0):
-            post = {"_id": message.author.id, "name": message.author.name, "eventRoll": [{"r": 0, "rStar":"NA", "rName": "", "rUrl": ""}], "eiRoll": 0, "normalRoll": 0, "event4Pity": 0, "ei4Pity": 0, "normal4Pity": 0, "event5Pity": 0, "ei5Pity": 0, "normal5Pity": 0, "eventPromo": 0, }
+            post = {"_id": message.author.id, "name": message.author.name, "eventRoll": [{"r": 0, "rStar":0, "rName": "", "rUrl": ""}], "eiRoll": 0, "normalRoll": 0, "event4Pity": 0, "ei4Pity": 0, "normal4Pity": 0, "event5Pity": 0, "ei5Pity": 0, "normal5Pity": 0, "eventPromo": 0, }
             collection.insert_one(post)
         
         user = collection.find(myquery)

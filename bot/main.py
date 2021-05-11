@@ -38,7 +38,7 @@ async def on_message(message):
         tData = await func.rollEvent(user[0])
         collection.update_one({"_id": tData["_id"]}, {"$set": {"eventRoll": tData["eventRoll"], "event4Pity": tData["event4Pity"], "event5Pity":tData["event5Pity"]}})
 
-        rTitle = "You rolled a " + tData["eventRoll"][-1]["rStar"] + " star"
+        rTitle = "You rolled a " + str(tData["eventRoll"][-1]["rStar"]) + " star item"
         embed = discord.Embed(title=rTitle, color=discord.Color.purple())
         embed.set_author(name=message.author.name, icon_url = message.author.avatar_url)
         if not tData["eventRoll"][-1]["rUrl"] == "":

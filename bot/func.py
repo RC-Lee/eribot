@@ -33,13 +33,13 @@ def getW(data):
     return temp
 
 def choose5(data):
-    char = get5(data)
+    items = get5(data)
     if random.random() < 0.5:
-        for item in char:
+        for item in items:
             if item["up"]:
                 return item
     else:
-        return random.choice(char)
+        return random.choice(items)
 
 def choose4(data):
     items = get4(data)
@@ -64,7 +64,7 @@ async def rollEvent(userData):
         e5Pity = 0
         e4Pity = 0
     elif(e4Pity == 10):
-        x = random.choices([4,5], weights=(994, 6))
+        x = random.choices([4,5], weights=[994, 6])
         if x == 4:
             if random.random() < 0.5:
                 item = getC(ebanner)
@@ -75,7 +75,7 @@ async def rollEvent(userData):
             item = choose5(ebanner)
         e4Pity = 0
     else:
-        x = random.choices([3, 4, 5], weights=(943, 51, 6))
+        x = random.choices([3, 4, 5], weights=[943, 51, 6])
         if x == 5:
             item = choose5(ebanner)
             e5Pity = 0

@@ -46,7 +46,7 @@ async def on_message(message):
         embed.set_footer(text="Roll #" + str(tData["eventRoll"][-1]["r"]))
         await message.channel.send(embed=embed)
 
-    if message.content == '$re10'
+    if message.content == '$re10':
         myquery = {"_id": message.author.id}
         if(collection.count_documents(myquery) == 0):
             post = {"_id": message.author.id, "name": message.author.name, "eventRoll": [{"r": 0, "rStar":"NA", "rName": "", "rUrl": ""}], "eiRoll": 0, "normalRoll": 0, "event4Pity": 0, "ei4Pity": 0, "normal4Pity": 0, "event5Pity": 0, "ei5Pity": 0, "normal5Pity": 0, "eventPromo": 0, }

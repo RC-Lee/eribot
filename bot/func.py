@@ -5,18 +5,32 @@ with open("./bot/bannerData.json") as f:
 ebanner = data["eventBanner"]
 
 def get4(data):
-    char = []
+    temp = []
     for item in data:
         if(item["star"] == 4):
-            char.append(item)
-    return char
+            temp.append(item)
+    return temp
 
 def get5(data):
-    char = []
+    temp = []
     for item in data:
         if(item["star"] == 5):
-            char.append(item)
-    return char
+            temp.append(item)
+    return temp
+
+def getC(data):
+    temp = []
+    for item in data:
+        if(item["type"] == 'character'):
+            temp.append(item)
+    return temp
+
+def getW(data):
+    temp = []
+    for item in data:
+        if(item["type"] == 'weapon'):
+            temp.append(item)
+    return temp
 
 def choose5(data):
     char = get5(data)
@@ -43,7 +57,6 @@ async def rollEvent(userData):
     eRoll = tData["eventRoll"][-1]["r"] + 1
     e5Pity = tData["event5Pity"] + 1
     e4Pity = tData["event4Pity"] + 1
-    eventPromo = tData["eventPromo"]
     item = {}
 
     if(e5Pity == 90):
@@ -51,24 +64,35 @@ async def rollEvent(userData):
         e5Pity = 0
         e4Pity = 0
     elif(e4Pity == 10):
-        item = choose4(ebanner)
+        x = random.choices([4,5], weights=(994, 6))
+        if x == 4:
+            if random.random() < 0.5:
+                item = getC(ebanner)
+            else:
+                item = getW(ebanner)
+            item = choose4(item)
+        else:
+            item = choose5(ebanner)
         e4Pity = 0
     else:
-        from random import randint
-        value = randint(1, 1000)
-        if value <= 6:
+        x = random.choices([3, 4, 5], weights=(943, 51, 6))
+        if x == 5:
             item = choose5(ebanner)
             e5Pity = 0
             e4Pity = 0
-        elif value <= 57:
-            item = choose4(ebanner)
+        elif value == 4:
+            if random.random() < 0.5:
+                item = getC(ebanner)
+            else:
+                item = getW(ebanner)
+            item = choose4(item)
             e4Pity = 0
             
     tData["event5Pity"] = e5Pity
     tData["event4Pity"] = e4Pity
     if(item):
-        tData["eventRoll"].append({"r": eRoll, "rStar": item["star"], "rName": item["name"], "rUrl": item["imgUrl"]})
+        tData["eventRoll"].append({"r": eRoll, "star": item["star"], "name": item["name"], "imgUrl": item["imgUrl"], "type": item["type"]})
     else:
-        tData["eventRoll"].append({"r": eRoll, "rStar": 3, "rName": "3 star", "rUrl": ""})
+        tData["eventRoll"].append({"r": eRoll, "star": 3, "name": "3 star", "imgUrl": "", "type": "weapon"})
 
     return tData

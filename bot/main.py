@@ -41,7 +41,7 @@ async def on_message(message):
         rTitle = "You rolled a " + tData["eventRoll"][-1]["rStar"] + " star"
         embed = discord.Embed(title=rTitle, color=discord.Color.purple())
         embed.set_author(name=message.author.name, icon_url = message.author.avatar_url)
-        if tData["eventRoll"][-1]["rUrl"] != "":
+        if not tData["eventRoll"][-1]["rUrl"] == "":
             embed.set_image(url=tData["eventRoll"][-1]["rUrl"])
         embed.set_footer(text="Roll #" + str(tData["eventRoll"][-1]["r"]))
         await message.channel.send(embed=embed)
@@ -55,10 +55,19 @@ async def on_message(message):
         user = collection.find(myquery)
         embed = discord.Embed(title="Making 10 wishes", color=discord.Color.orange())
         embed.set_author(name=message.author.name, icon_url = message.author.avatar_url)
+        temp = {}
         for i in range(0,10):
             tData = await func.rollEvent(user[0])
             collection.update_one({"_id": tData["_id"]}, {"$set": {"eventRoll": tData["eventRoll"], "event4Pity": tData["event4Pity"], "event5Pity":tData["event5Pity"]}})
             embed.add_field(name="Roll " + str(tData["eventRoll"][-1]["r"]) +": ", value= tData["eventRoll"][-1]["rName"], inline=False)
+            if(tData["eventRoll"][-1]["rStar"] >= 4):
+                if(temp):
+                    if(tData["eventRoll"][-1]["rStar"] > temp["rStar"]):
+                        temp = tData["eventRoll"][-1]
+                else:
+                    temp = tData["eventRoll"][-1]
+        if(temp):
+            embed.set_image(url=temp["rUrl"])
         await message.channel.send(embed=embed)
 
     if message.content == '$le':

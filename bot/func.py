@@ -7,14 +7,14 @@ ebanner = data["eventBanner"]
 def get4(data):
     char = []
     for item in data:
-        if(item["star"] == "four"):
+        if(item["star"] == 4):
             char.append(item)
     return char
 
 def get5(data):
     char = []
     for item in data:
-        if(item["star"] == "five"):
+        if(item["star"] == 5):
             char.append(item)
     return char
 
@@ -69,6 +69,6 @@ async def rollEvent(userData):
     if(item):
         tData["eventRoll"].append({"r": eRoll, "rStar": item["star"], "rName": item["name"], "rUrl": item["imgUrl"]})
     else:
-        tData["eventRoll"].append({"r": eRoll, "rStar": "three", "rName": "3 star", "rUrl": ""})
+        tData["eventRoll"].append({"r": eRoll, "rStar": 3, "rName": "3 star", "rUrl": ""})
 
     return tData

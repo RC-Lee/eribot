@@ -58,7 +58,7 @@ async def on_message(message):
         for i in range(0,10):
             tData = await func.rollEvent(user[0])
             collection.update_one({"_id": tData["_id"]}, {"$set": {"eventRoll": tData["eventRoll"], "event4Pity": tData["event4Pity"], "event5Pity":tData["event5Pity"]}})
-            embed.add_field(name="Roll " + str(roll["r"]) +": ", value=roll["rName"], inline=False)
+            embed.add_field(name="Roll " + str(tData["eventRoll"][-1]["r"]) +": ", value=tData["eventRoll"][-1]["rName"], inline=False)
         await message.channel.send(embed=embed)
 
     if message.content == '$list_event':

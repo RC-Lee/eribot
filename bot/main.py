@@ -23,10 +23,8 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-
     if not message.guild.me.permissions_in(message.channel).read_messages:
         return
-
     if not message.guild.me.permissions_in(message.channel).send_messages:
         return
     
@@ -48,6 +46,21 @@ async def on_message(message):
         embed.set_footer(text="Roll #" + str(tData["eventRoll"][-1]["r"]))
         await message.channel.send(embed=embed)
 
+    if message.content == '$re10'
+        myquery = {"_id": message.author.id}
+        if(collection.count_documents(myquery) == 0):
+            post = {"_id": message.author.id, "name": message.author.name, "eventRoll": [{"r": 0, "rStar":"NA", "rName": "", "rUrl": ""}], "eiRoll": 0, "normalRoll": 0, "event4Pity": 0, "ei4Pity": 0, "normal4Pity": 0, "event5Pity": 0, "ei5Pity": 0, "normal5Pity": 0, "eventPromo": 0, }
+            collection.insert_one(post)
+        
+        user = collection.find(myquery)
+        embed = discord.Embed(title="Making 10 wishes", color=discord.Color.orange())
+        embed.set_author(name=message.author.name, icon_url = message.author.avatar_url)
+        for i in range(0,10):
+            tData = await func.rollEvent(user[0])
+            collection.update_one({"_id": tData["_id"]}, {"$set": {"eventRoll": tData["eventRoll"], "event4Pity": tData["event4Pity"], "event5Pity":tData["event5Pity"]}})
+            embed.add_field(name="Roll " + str(roll["r"]) +": ", value=roll["rName"], inline=False)
+        await message.channel.send(embed=embed)
+
     if message.content == '$list_event':
         myquery = {"_id": message.author.id}
         if(collection.count_documents(myquery) == 0):
@@ -55,6 +68,7 @@ async def on_message(message):
         else:
             user = collection.find(myquery)
             embed = discord.Embed(title="Listing 4 and 5 star event rolls", color=discord.Color.red())
+            embed.set_author(name=message.author.name, icon_url = message.author.avatar_url)
             for roll in user[0]["eventRoll"]:
                 if(roll["rStar"] == "four" or roll["rStar"] == "five"):
                     embed.add_field(name="Roll " + str(roll["r"]) +": ", value=roll["rName"], inline=False)

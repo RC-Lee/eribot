@@ -82,6 +82,6 @@ async def rollEvent(userData):
     if(item):
         tData["eventRoll"].append({"r": eRoll, "rStar": item["star"], "rName": item["name"], "rUrl": item["imgUrl"]})
     else:
-        tData["eventRoll"].append({"r": eRoll, "rStar": "three", "rName": "", "rUrl": ""})
+        tData["eventRoll"].append({"r": eRoll, "rStar": "three", "rName": "3 star", "rUrl": ""})
 
     return tData

@@ -1,6 +1,6 @@
 import random
 import json
-with open("./bannerData.json") as f:
+with open("./bot/bannerData.json") as f:
     data = json.load(f)
 ebanner = data["eventBanner"]
 

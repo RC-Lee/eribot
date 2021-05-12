@@ -67,7 +67,7 @@ async def rollEvent(userData):
         item = choose5(ebanner)
         e5Pity = 0
         e4Pity = 0
-    elif(e4Pity == 10)
+    elif(e4Pity == 10):
         x = random.choices([4,5], weights=[994, 6])
         if x[0] == 4:
             if random.random() < 0.5:

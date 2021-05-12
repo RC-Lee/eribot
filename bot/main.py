@@ -54,8 +54,8 @@ async def on_message(message):
             for i in range(0,10):
                 tData = await func.rollEvent(user[0])
                 collection.update_one({"_id": tData["_id"]}, {"$set": {"eventRoll": tData["eventRoll"], "event4Pity": tData["event4Pity"], "event5Pity":tData["event5Pity"]}})
-                embed.add_field(name="Roll " + str(tData["eventRoll"][-1]["r"]) +": ", value= tData["eventRoll"][-1]["name"], inline=False)
                 if(tData["eventRoll"][-1]["star"] >= 4):
+                    embed.add_field(name="Roll " + str(tData["eventRoll"][-1]["r"]) +": ", value= tData["eventRoll"][-1]["name"], inline=False)
                     if(temp):
                         if(tData["eventRoll"][-1]["star"] > temp["star"]):
                             temp = tData["eventRoll"][-1]

@@ -64,16 +64,21 @@ async def rollEvent(userData):
         e5Pity = 0
         e4Pity = 0
     elif(e4Pity == 10):
-        x = random.choices([4,5], weights=[994, 6])
-        if x[0] == 4:
-            if random.random() < 0.5:
-                item = getC(ebanner)
-            else:
-                item = getW(ebanner)
-            item = choose4(item)
-        else:
+        if(e5Pit > 80 ):
             item = choose5(ebanner)
-        e4Pity = 0
+            e5Pity = 0
+            e4Pity = 0
+        else:
+            x = random.choices([4,5], weights=[994, 6])
+            if x[0] == 4:
+                if random.random() < 0.5:
+                    item = getC(ebanner)
+                else:
+                    item = getW(ebanner)
+                item = choose4(item)
+            else:
+                item = choose5(ebanner)
+            e4Pity = 0
     else:
         x = random.choices([3, 4, 5], weights=[943, 51, 6])
         if x[0] == 5:
